@@ -1,0 +1,26 @@
+CREATE DATABASE ChatBotDB;
+
+USE ChatBotDB;
+
+CREATE TABLE User (
+    UserId INT PRIMARY KEY AUTO_INCREMENT,
+    TelegramId BIGINT NOT NULL,
+    Username VARCHAR(255),
+    UNIQUE (TelegramId)
+);
+
+CREATE TABLE Note (
+    NoteId INT PRIMARY KEY AUTO_INCREMENT,
+    TUserId BIGINT,
+    NoteName VARCHAR(255),
+    FOREIGN KEY (TUserId) REFERENCES User(TelegramId)
+);
+
+CREATE TABLE ItemNote (
+    ItemNoteId INT PRIMARY KEY AUTO_INCREMENT,
+    NoteId INT,
+    Description VARCHAR(255),
+    Points INT,
+    IsCompleted BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (NoteId) REFERENCES Note(NoteId)
+);
